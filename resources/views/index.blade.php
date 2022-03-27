@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
     <div class="col-12">
-                <a href="bukuTamu/create" class="btn btn-primary mb-2">Create Post</a>
+                <a href="bukuTamu/check-in" class="btn btn-primary mb-2">Check In</a>
                 <br>
                 <table class="table table-striped">
                     <thead>
@@ -32,8 +32,8 @@
                             <td>
                             <a href="bukuTamu/{{$bukuTamuDC->id}}" class="btn btn-primary">Show</a>
                             <a href="bukuTamu/{{$bukuTamuDC->id}}/edit" class="btn btn-primary">Edit</a>
-                            <form action="bukuTamu/{{$bukuTamuDC->id}}" method="post" class="d-inline">
-                                {{ csrf_field() }}
+                            <form method="POST" action="bukuTamu/{{$bukuTamuDC->id}}/delete" class="d-inline">
+                                @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">Delete</button>
                             </form>

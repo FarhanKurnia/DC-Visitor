@@ -50,18 +50,9 @@ class BukuTamuDCController extends Controller
             'pekerjaan' => 'required',
             'status' => 'required',
             ]);
-       
-        $bukuTamuDC = new BukuTamuDC();
-        $bukuTamuDC->nama = $request->nama;
-        $bukuTamuDC->no_ktp = $request->no_ktp;
-        $bukuTamuDC->instansi = $request->instansi;
-        $bukuTamuDC->instansi = $request->no_rack;
-        $bukuTamuDC->instansi = $request->no_slot;
-        $bukuTamuDC->instansi = $request->pekerjaan;
-        $bukuTamuDC->instansi = $request->status;
 
-        $bukuTamuDC->save();
-        return redirect('/home')->with('success','Post created successfully!');
+        BukuTamuDC::create($request->all());
+        return redirect('/home')->with('success','Berhasil Check In!');
     }
 
     /**
@@ -106,6 +97,8 @@ class BukuTamuDCController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bukuTamuDC = BukuTamuDC::find($id);
+        $bukuTamuDC->delete();
+        return back()->with('success','Data Berhasil dihapus');
     }
 }

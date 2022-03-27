@@ -1,15 +1,12 @@
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<script type="text/javascript" src="/js/app.js"></script>
-
 @extends('layouts.app')
 @section('title', 'Home')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
     <div class="col-12">
-                <a href="bukuTamu/create" class="btn btn-primary mb-2">Create Post</a> 
+                <a href="bukuTamu/create" class="btn btn-primary mb-2">Create Post</a>
                 <br>
-                <table class="table table-bordered">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Nama</th>
@@ -45,7 +42,7 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div> 
+            </div>
     </div>
 </div>
 @endsection

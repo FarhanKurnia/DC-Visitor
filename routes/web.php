@@ -19,10 +19,11 @@ Route::get('/', function () {
 
 /*Auth::routes();*/
 
-Route::get('/home', [App\Http\Controllers\BukuTamuDCController::class, 'index'])->name('home');
-Route::get('bukuTamu/check-in', [App\Http\Controllers\BukuTamuDCController::class, 'create']);
-Route::post('bukuTamu/store', [App\Http\Controllers\BukuTamuDCController::class, 'store']);
-Route::get('bukuTamu/{id}/edit', [App\Http\Controllers\BukuTamuDCController::class, 'edit']);
-Route::get('bukuTamu/{id}/show', [App\Http\Controllers\BukuTamuDCController::class, 'show']);
-Route::put('bukuTamu/{id}/update', [App\Http\Controllers\BukuTamuDCController::class, 'update']);
-Route::delete('bukuTamu/{id}/delete', [App\Http\Controllers\BukuTamuDCController::class, 'destroy']);
+Route::get('DC-Visitor/dashboard', [App\Http\Controllers\BukuTamuDCController::class, 'index'])->name('home');
+Route::get('DC-Visitor/check-in', [App\Http\Controllers\BukuTamuDCController::class, 'create']);
+Route::get('DC-Visitor/home', [App\Http\Controllers\BukuTamuDCController::class, 'home']);
+Route::post('DC-Visitor/store', [App\Http\Controllers\BukuTamuDCController::class, 'store']);
+Route::get('DC-Visitor/{id}/edit', [App\Http\Controllers\BukuTamuDCController::class, 'edit']);
+Route::get('DC-Visitor/{id}/show', [App\Http\Controllers\BukuTamuDCController::class, 'show']);
+Route::put('DC-Visitor/{id}/update', [App\Http\Controllers\BukuTamuDCController::class, 'update']);
+Route::delete('DC-Visitor/{id}/delete', [App\Http\Controllers\BukuTamuDCController::class, 'destroy']);

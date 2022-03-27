@@ -17,10 +17,19 @@ class BukuTamuDCController extends Controller
     public function index()
     {
         // mengambil data dari table tamu
-    	$bukuTamuDC = BukuTamuDC::all();
+    	$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->get();
 
     	// mengirim data tamu ke view index
-        return view('index', compact('bukuTamuDC'));
+        return view('admin.index', compact('bukuTamuDC'));
+    }
+
+    public function home()
+    {
+        // mengambil data dari table tamu
+    	//$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->get();
+        return view('visitor.home');
+    	// mengirim data tamu ke view index
+        //return view('admin.index', compact('bukuTamuDC'));
     }
 
     /**
@@ -30,7 +39,7 @@ class BukuTamuDCController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('visitor.create');
     }
 
     /**
@@ -52,7 +61,7 @@ class BukuTamuDCController extends Controller
             ]);
 
         BukuTamuDC::create($request->all());
-        return redirect('/home')->with('success','Berhasil Check In!');
+        return redirect('/DC-Visitor/home')->with('success','Berhasil Check In!');
     }
 
     /**

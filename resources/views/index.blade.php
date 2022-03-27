@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <script type="text/javascript" src="/js/app.js"></script>
 
-@extends('layout.app')
+@extends('layouts.app')
 @section('title', 'Home')
 @section('content')
 <div class="container">

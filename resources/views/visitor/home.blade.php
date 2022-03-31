@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-client')
 @section('title', 'home')
 @section('content')
 <div class="container" style="max-width: 600px; margin:auto;">

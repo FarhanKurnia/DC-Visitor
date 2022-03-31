@@ -59,8 +59,19 @@ class BukuTamuDCController extends Controller
             'pekerjaan' => 'required',
             'status' => 'required',
             ]);
+        /*$BukuTamuDC        = new BukuTamuDC;
+        $BukuTamuDC->nama = $request->nama;
+        $BukuTamuDC->no_ktp  = $request->no_ktp;
+        $BukuTamuDC->instansi  = $request->instansi;
+        $BukuTamuDC->no_rack  = $request->no_rack;
+        $BukuTamuDC->no_slot  = $request->no_slot;
+        $BukuTamuDC->pekerjaan  = $request->pekerjaan;
+        $BukuTamuDC->status  = $request->status;*/
+
 
         BukuTamuDC::create($request->all());
+        //$BukuTamuDC->save();
+        //return back()->with('success','Berhasil Check In!');
         return redirect('/DC-Visitor/home')->with('success','Berhasil Check In!');
     }
 

@@ -23,6 +23,7 @@ class CreateBukuTamuDCSTable extends Migration
             $table->string('pekerjaan');
             $table->string('foto')->nullable();
             $table->enum('status',['checkin','checkout']);
+            $table->integer('durasi')->nullable();
             $table->timestamps();
         });
     }

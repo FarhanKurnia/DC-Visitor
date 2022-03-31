@@ -83,7 +83,7 @@ class BukuTamuDCController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.show', compact('bukuTamuDC'));
     }
 
     /**
@@ -92,9 +92,12 @@ class BukuTamuDCController extends Controller
      * @param  \App\Models\BukuTamuDC  $bukuTamuDC
      * @return \Illuminate\Http\Response
      */
-    public function edit(BukuTamuDC $bukuTamuDC)
+    public function edit($id)
     {
-        //
+        // mengambil data pegawai berdasarkan id yang dipilih
+	    $bukuTamuDC = BukuTamuDC::findOrFail($id);
+	    // passing data pegawai yang didapat ke view edit.blade.php
+	    return view('admin.edit', compact('bukuTamuDC'));
     }
 
     /**
@@ -106,7 +109,43 @@ class BukuTamuDCController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required',
+            'no_ktp'=>'required',
+        	'instansi' => 'required',
+        	'no_rack' => 'required',
+            'no_slot' => 'required',
+            'pekerjaan' => 'required',
+            'status' => 'required',
+        ]);
+        $bukuTamuDC = BukuTamuDC::findOrFail($id);
+
+        $bukuTamuDC->update([
+            'nama' => $request->nama,
+            'no_ktp' => $request->no_ktp,
+            'instansi' => $request->instansi,
+            'no_rack' => $request->no_rack,
+            'no_slot' => $request->no_slot,
+            'pekerjaan' => $request->pekerjaan,
+            'status' => $request->status,
+
+        ]);
+
+        if ($bukuTamuDC) {
+            return redirect()
+                ->route('dashboard')
+                ->with([
+                    'success' => 'Post has been updated successfully'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Some problem has occured, please try again'
+                ]);
+        }
+
     }
 
     /**

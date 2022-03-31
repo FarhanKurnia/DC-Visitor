@@ -2,7 +2,7 @@
 @section('title', 'create')
 @section('content')
 <div class="container" style="max-width: 600px; margin:auto;">
-        <form action="{{ url('DC-Visitor/store') }}" method="POST">
+        <form action="{{ route('store') }}" method="POST">
             @csrf
             <div class="row ">
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">

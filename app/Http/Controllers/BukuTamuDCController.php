@@ -148,6 +148,38 @@ class BukuTamuDCController extends Controller
 
     }
 
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		//$cari = $request->cari;
+        // mengirim data pegawai ke view index
+            //return view('visitor.checkin', compact('bukuTamuDC'));
+
+        if($request->ajax()){
+            $output="";
+ 
+    	// mengambil data dari table pegawai sesuai pencarian data
+		$bukuTamuDC = BukuTamuDC::where([
+            ['no_ktp','like',"%".$request->cari."%"],
+            ['status', '=', 'checkin'],
+            ])->get();
+            if($bukuTamuDC){
+                foreach ($bukuTamuDC as $key => $bukuTamuDC) {
+                    $output.='<tr>'.
+                    '<td>'.$bukuTamuDC->nama.'</td>'.
+                    '<td>'.$bukuTamuDC->no_ktp.'</td>'.
+                    '<td>'.$bukuTamuDC->instansi.'</td>'.
+                    '<td>'.$bukuTamuDC->no_rack.'</td>'.
+                    '<td>'.$bukuTamuDC->no_slot.'</td>'.
+                    '<td>'.$bukuTamuDC->pekerjaan.'</td>'.
+                    '<td>'.$bukuTamuDC->status.'</td>'.
+                    '</tr>';
+                    }
+            return Response($output);
+            }
+        }
+    }
+    
     /**
      * Remove the specified resource from storage.
      *

@@ -17,10 +17,11 @@ class BukuTamuDCController extends Controller
     public function index()
     {
         // mengambil data dari table tamu
-    	$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->get();
+    	$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->paginate(5);
 
     	// mengirim data tamu ke view index
         return view('admin.index', compact('bukuTamuDC'));
+        //return view('admin.index',['bukuTamuDC' => $bukuTamuDC]);
     }
 
     public function home()
@@ -100,6 +101,49 @@ class BukuTamuDCController extends Controller
 	    return view('admin.edit', compact('bukuTamuDC'));
     }
 
+    public function editlogout($id)
+    {
+        // mengambil data pegawai berdasarkan id yang dipilih
+	    $bukuTamuDC = BukuTamuDC::findOrFail($id);
+	    // passing data pegawai yang didapat ke view edit.blade.php
+	    return view('visitor.edit', compact('bukuTamuDC'));
+    }
+
+    public function updatelogout(Request $request, $id)
+    {
+        $this->validate($request, [
+            'nama' => 'required',
+            'no_ktp'=>'required',
+        	'instansi' => 'required',
+        	'no_rack' => 'required',
+            'no_slot' => 'required',
+            'pekerjaan' => 'required',
+            'status' => 'required',
+        ]);
+        $bukuTamuDC = BukuTamuDC::findOrFail($id);
+
+        $bukuTamuDC->update([
+            'status' => $request->status='checkout',
+
+        ]);
+
+        if ($bukuTamuDC) {
+            return redirect()
+                ->route('home')
+                ->with([
+                    'success' => 'Post has been updated successfully'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Some problem has occured, please try again'
+                ]);
+        }
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -148,38 +192,19 @@ class BukuTamuDCController extends Controller
 
     }
 
-    public function cari(Request $request)
+    public function search(Request $request)
 	{
-		// menangkap data pencarian
-		//$cari = $request->cari;
-        // mengirim data pegawai ke view index
-            //return view('visitor.checkin', compact('bukuTamuDC'));
+		$search = $request->input('search');
 
-        if($request->ajax()){
-            $output="";
- 
-    	// mengambil data dari table pegawai sesuai pencarian data
-		$bukuTamuDC = BukuTamuDC::where([
-            ['no_ktp','like',"%".$request->cari."%"],
-            ['status', '=', 'checkin'],
-            ])->get();
-            if($bukuTamuDC){
-                foreach ($bukuTamuDC as $key => $bukuTamuDC) {
-                    $output.='<tr>'.
-                    '<td>'.$bukuTamuDC->nama.'</td>'.
-                    '<td>'.$bukuTamuDC->no_ktp.'</td>'.
-                    '<td>'.$bukuTamuDC->instansi.'</td>'.
-                    '<td>'.$bukuTamuDC->no_rack.'</td>'.
-                    '<td>'.$bukuTamuDC->no_slot.'</td>'.
-                    '<td>'.$bukuTamuDC->pekerjaan.'</td>'.
-                    '<td>'.$bukuTamuDC->status.'</td>'.
-                    '</tr>';
-                    }
-            return Response($output);
-            }
-        }
+        $bukuTamuDC = BukuTamuDC::query()
+                    ->where('nama', 'LIKE', "%{$search}%")
+                    ->Where('status','checkin')
+                    ->orWhere('no_ktp', 'LIKE', "%{$search}%")
+                    ->get();
+
+        return view('visitor.search', compact('bukuTamuDC'));
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *

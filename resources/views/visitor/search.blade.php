@@ -1,0 +1,56 @@
+@extends('layouts.app-client')
+@section('title', 'create')
+@section('content')
+<div class="container" style="max-width: 600px; margin:auto;">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <form action="{{ route('search') }}" method="GET">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control form-control-sm" name="search" required/>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-danger btn-sm">Search</button>
+                    </div>
+                </div>
+              </form>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Nomer KTP</th>
+                            <th>Instansi</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if($bukuTamuDC->isNotEmpty())
+                            @foreach($bukuTamuDC as $bukuTamuDC)
+                                @if($bukuTamuDC->status=='checkin')
+                                    <tr>
+                                        <td>{{ $bukuTamuDC->nama }}</td>
+                                        <td>{{ $bukuTamuDC->no_ktp }}</td>
+                                        <td>{{ $bukuTamuDC->instansi }}</td>
+                                        <td>
+                                            <a href="{{$bukuTamuDC->id}}/checkout" class="btn btn-success btn-sm" style="border: none; background-color:transparent;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        @else
+                        <tr>
+                            <tr>
+                                <td colspan="5" style="text-align:center;">Data tidak ditemukan</th>
+                            </tr>
+                        </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

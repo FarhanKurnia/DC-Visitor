@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col text-center">
             <a href="check-in" class="btn btn-danger btn-lg btn-block">Check In</a>
-            <a href="check-out" class="btn btn-danger btn-lg btn-block">Check Out</a>
+            <a href="search" class="btn btn-danger btn-lg btn-block">Check Out</a>
         </div>
     </div>
 </div>

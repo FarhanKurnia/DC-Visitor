@@ -60,6 +60,7 @@ class BukuTamuDCController extends Controller
             'pekerjaan' => 'required',
             'status' => 'required',
             ]);
+
         /*$BukuTamuDC        = new BukuTamuDC;
         $BukuTamuDC->nama = $request->nama;
         $BukuTamuDC->no_ktp  = $request->no_ktp;
@@ -68,12 +69,23 @@ class BukuTamuDCController extends Controller
         $BukuTamuDC->no_slot  = $request->no_slot;
         $BukuTamuDC->pekerjaan  = $request->pekerjaan;
         $BukuTamuDC->status  = $request->status;*/
+        //$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->paginate(5);
 
-
-        BukuTamuDC::create($request->all());
+        //gagal bikin supaya if ktp_masukan == ktp_database && status == checkin
+        //$ktp=BukuTamuDC::select('no_ktp')->where('no_ktp', $request->no_ktp)->first(); //this also can
+        $bukuTamuDC=BukuTamuDC::where('no_ktp', $request->no_ktp)->first(); //this also can
+        //$status=BukuTamuDC::select('status')->where('status', 'checkin')->first(); //this also can
+        //$status=BukuTamuDC::where('status', 'checkin')->first(); //this also can
+        if($request->no_ktp == $bukuTamuDC->no_ktp && $request->status == $bukuTamuDC->status){
+        //if (BukuTamuDC::where('no_ktp', $request->no_ktp )->exists() && $status == $request->status) {
+            // your code...
+            return back()->with('Failed','Gagal Check In!');
+        }else{
+            BukuTamuDC::create($request->all());
+            return redirect('/DC-Visitor/home')->with('success','Berhasil Check In!');
+        }
         //$BukuTamuDC->save();
-        //return back()->with('success','Berhasil Check In!');
-        return redirect('/DC-Visitor/home')->with('success','Berhasil Check In!');
+
     }
 
     /**

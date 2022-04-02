@@ -3,10 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-xs-4 col-sm-12 col-md-12 col-lg-12">
-                <a href="check-in" class="btn btn-primary mb-2">Check In</a>
+        <div class="col-xs-2 col-md-12 col-lg-12">
+                <a href="check-in" class="btn btn-primary btn-sm mb-2">Check In</a>
                 <br>
-                <table class="table table-striped">
+                <div class="table-responsive">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -29,7 +30,7 @@
                             <td>{{ $visitor->no_ktp }}</td>
                             <td>{{ $visitor->instansi }}</td>
                             <td>{{ $visitor->status }}</td>
-                            <td>{{ $visitor->created_at->isoFormat('dddd, D MMMM Y')}}</td>  
+                            <td>{{ $visitor->created_at->isoFormat('dddd, D MMMM Y')}}</td>
                             </td>
                             <td>
                             <a href="{{$visitor->id}}/show" class="btn btn-primary btn-sm" style="border: none; background-color:transparent;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -53,6 +54,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                </div>
                 <div class="d-flex  justify-content-end">
                     {{ $bukuTamuDC->links() }}
                 </div>

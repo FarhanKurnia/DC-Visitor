@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand mx-auto" href="{{ url('DC-Visitor/home') }}">
                     <img src="/assets/citranet.png" alt="" width="100" height="30" >

@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('DC-Visitor/search', function () {
-    return view('visitor.cari');
-});
 
 /*Auth::routes();*/
 
@@ -33,3 +30,6 @@ Route::put('DC-Visitor/{id}/update', [App\Http\Controllers\BukuTamuDCController:
 Route::put('DC-Visitor/{id}/update-checkout', [App\Http\Controllers\BukuTamuDCController::class, 'updatelogout']);
 Route::delete('DC-Visitor/{id}/delete', [App\Http\Controllers\BukuTamuDCController::class, 'destroy']);
 Route::get('DC-Visitor/search', [App\Http\Controllers\BukuTamuDCController::class, 'search'])->name('search');
+
+//Auth::routes();
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -57,14 +57,16 @@
                 <strong>Check In</strong>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                {{ date_format($bukuTamuDC->created_at, 'l, j F Y | h:i:s A') }}
+                {{ $bukuTamuDC->created_at->isoFormat('dddd, D MMMM Y')}}
+                {{ date_format($bukuTamuDC->created_at,'h:i:s A')}}
             </div>
 
             <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <strong>Check Out</strong>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                {{ date_format($bukuTamuDC->updated_at, 'l, j F Y | h:i:s A') }}
+                {{ $bukuTamuDC->updated_at->isoFormat('dddd, D MMMM Y')}}
+                {{ date_format($bukuTamuDC->updated_at,'h:i:s A')}}
             </div>
 
             <div class="col-6 col-sm-6 col-md-6 col-lg-6">

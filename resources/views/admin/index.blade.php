@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-4 col-sm-12 col-md-12 col-lg-12">
                 <a href="check-in" class="btn btn-primary mb-2">Check In</a>
                 <br>
                 <table class="table table-striped">

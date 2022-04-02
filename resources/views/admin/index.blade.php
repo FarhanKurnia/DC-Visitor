@@ -3,34 +3,36 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-12">
+        <div class="col-xs-6 col-sm-12 col-md-12 col-lg-12">
                 <a href="check-in" class="btn btn-primary mb-2">Check In</a>
                 <br>
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Nama</th>
-                            <th>Nomer KTP</th>
+                            <th>KTP</th>
                             <th>Instansi</th>
-                            <th>Nomor Rack</th>
-                            <th>Nomor Slot</th>
-                            <th>Pekerjaan</th>
                             <th>Status</th>
+                            <th>Waktu</th>
                             <th colspan="2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $no = '1';
+                        @endphp
                         @foreach($bukuTamuDC as $visitor)
                         <tr>
+                            <td>{{ $no++}}</td>
                             <td>{{ $visitor->nama }}</td>
                             <td>{{ $visitor->no_ktp }}</td>
                             <td>{{ $visitor->instansi }}</td>
-                            <td>{{ $visitor->no_rack }}</td>
-                            <td>{{ $visitor->no_slot }}</td>
-                            <td>{{ $visitor->pekerjaan }}</td>
                             <td>{{ $visitor->status }}</td>
+                            <td>{{ $visitor->created_at->isoFormat('dddd, D MMMM Y')}}</td>  
+                            </td>
                             <td>
-                            <a data-toggle="modal" href="{{$visitor->id}}" class="btn btn-primary btn-sm" style="border: none; background-color:transparent;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <a href="{{$visitor->id}}/show" class="btn btn-primary btn-sm" style="border: none; background-color:transparent;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                 <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                                 <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                             </svg></a>
@@ -52,7 +54,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex  justify-content-end">
-                {{ $bukuTamuDC->links() }}
+                    {{ $bukuTamuDC->links() }}
                 </div>
             </div>
         </div>

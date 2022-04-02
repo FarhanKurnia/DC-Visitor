@@ -1,73 +1,88 @@
 @extends('layouts.app-client')
-
-
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2> {{ $bukuTamuDC->nama }}</h2>
+<div class="container" style="max-width: 600px; margin:auto;">
+    <div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <strong>Nama</strong>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.index') }}" title="Go back"> <i
-                        class="fas fa-backward "></i> </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nama:</strong>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 {{ $bukuTamuDC->nama }}
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>No KTP:</strong>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <strong>KTP</strong>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 {{ $bukuTamuDC->no_ktp }}
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Instansi:</strong>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <strong>Instansi</strong>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 {{ $bukuTamuDC->instansi }}
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>No Rack:</strong>
-                {{ $bukuTamuDC->no_rack }}
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <strong>Rack</strong>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>No Slot:</strong>
-                {{ $bukuTamuDC->no_slot }}
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    {{ $bukuTamuDC->no_rack }}
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Pekerjaan:</strong>
-                {{ $bukuTamuDC->pekerjaan }}
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <strong>Slot</strong>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Status:</strong>
-                {{ $bukuTamuDC->status }}
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    {{ $bukuTamuDC->no_slot }}
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Waktu Check in:</strong>
-                {{ date_format($project->created_at, 'jS M Y') }}
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <strong>Pekerjaan</strong>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Waktu Check out:</strong>
-                {{ date_format($project->updated_at, 'jS M Y') }}
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    {{ $bukuTamuDC->pekerjaan }}
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <strong>Status</strong>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    {{ $bukuTamuDC->status }}
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <strong>Check In</strong>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                {{ date_format($bukuTamuDC->created_at, 'l, j F Y | h:i:s A') }}
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <strong>Check Out</strong>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                {{ date_format($bukuTamuDC->updated_at, 'l, j F Y | h:i:s A') }}
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <strong>Durasi</strong>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                @php
+                    $create = $bukuTamuDC->created_at;
+                    $update = $bukuTamuDC->updated_at;
+                    $durasi = $create->diff($update);
+                    echo $durasi->format('%i Menit');
+                @endphp
             </div>
         </div>
     </div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 text-center mb-5 p-3">
+        <a href="{{ route('dashboard') }}" class="btn btn-danger btn-sm">Kembali</a>
+</div>
+</div>
 @endsection

@@ -84,6 +84,7 @@ class BukuTamuDCController extends Controller
      */
     public function show($id)
     {
+        $bukuTamuDC = BukuTamuDC::find($id);
         return view('admin.show', compact('bukuTamuDC'));
     }
 

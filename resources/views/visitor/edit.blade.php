@@ -66,6 +66,16 @@
                             @enderror
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                <div class="form-group">
+                    <strong>Waktu Check In</strong>
+                        <input type="text" class="form-control @error('pekerjaan') is-invalid @enderror" readonly name="created_at" value="{{ old('created_at', $bukuTamuDC->created_at) }}" required>
+                            <!-- error message untuk title -->
+                            @error('created_at')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                </div>
+            </div>
             <input type="hidden" name="status" value="checkin">
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-danger">Check Out</button>

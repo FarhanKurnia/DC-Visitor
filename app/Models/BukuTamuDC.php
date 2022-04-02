@@ -10,8 +10,8 @@ class BukuTamuDC extends Model
     //use HasFactory;
     protected $table = 'buku_tamu_d_c_s';
     protected $primaryKey = 'id';
-    /*protected $fillable = [
+    protected $fillable = [
         'nama','no_ktp','instansi','no_rack','no_slot','pekerjaan','status',
-    ];*/
-    protected $guarded = [];
+    ];
+    //protected $guarded = [];
 }

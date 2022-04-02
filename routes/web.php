@@ -28,7 +28,7 @@ Route::get('DC-Visitor/home', [App\Http\Controllers\BukuTamuDCController::class,
 Route::post('DC-Visitor/store', [App\Http\Controllers\BukuTamuDCController::class, 'store'])->name('store');
 Route::get('DC-Visitor/{id}/edit', [App\Http\Controllers\BukuTamuDCController::class, 'edit']);
 Route::get('DC-Visitor/{id}/checkout', [App\Http\Controllers\BukuTamuDCController::class, 'editlogout']);
-Route::get('DC-Visitor/{id}/show', [App\Http\Controllers\BukuTamuDCController::class, 'show']);
+Route::get('DC-Visitor/{id}/show', [App\Http\Controllers\BukuTamuDCController::class, 'show'])->name('show');
 Route::put('DC-Visitor/{id}/update', [App\Http\Controllers\BukuTamuDCController::class, 'update'])->name('update');
 Route::put('DC-Visitor/{id}/update-checkout', [App\Http\Controllers\BukuTamuDCController::class, 'updatelogout']);
 Route::delete('DC-Visitor/{id}/delete', [App\Http\Controllers\BukuTamuDCController::class, 'destroy']);

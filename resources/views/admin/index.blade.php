@@ -6,6 +6,16 @@
         <div class="col-xs-2 col-md-12 col-lg-12">
                 <a href="check-in" class="btn btn-primary btn-sm mb-2">Check In</a>
                 <br>
+                {{-- menampilkan error validasi --}}
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
                 <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead>

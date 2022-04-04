@@ -236,7 +236,7 @@ class BukuTamuDCController extends Controller
     {
         $bukuTamuDC = BukuTamuDC::find($id);
         $bukuTamuDC->delete();
-        return redirect('/DC-Visitor/home')->withErrors(['msg' => 'Data Berhasil dihapus']);
+        return back()->withErrors(['msg' => 'Data Berhasil dihapus']);
         //return back()->with('success','Data Berhasil dihapus');
     }
 }

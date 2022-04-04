@@ -7,6 +7,16 @@
             <img src="/assets/home.jpg" class="img-fluid" alt="Responsive image">
         </div>
     </div>
+    {{-- menampilkan error validasi --}}
+    @if (count($errors) > 0)
+    <div class="alert alert-success">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-sm">
             <p class="lead text-center">Welcome to Citranet Data Centers</p>

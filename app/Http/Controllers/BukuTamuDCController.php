@@ -94,7 +94,7 @@ class BukuTamuDCController extends Controller
             return Redirect::back()->withErrors(['msg' => 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu']);
         }else{
             BukuTamuDC::create($request->all());
-            return redirect('/DC-Visitor/home')->with('success','Berhasil Check In!');
+            return redirect('/DC-Visitor/home')->withErrors(['msg' => 'Berhasil Check In!']);
         }
         //$BukuTamuDC->save();
 
@@ -153,11 +153,7 @@ class BukuTamuDCController extends Controller
         ]);
 
         if ($bukuTamuDC) {
-            return redirect()
-                ->route('home')
-                ->with([
-                    'success' => 'Post has been updated successfully'
-                ]);
+            return redirect('/DC-Visitor/home')->withErrors(['msg' => 'Berhasil Check-Out!']);
         } else {
             return redirect()
                 ->back()
@@ -240,6 +236,7 @@ class BukuTamuDCController extends Controller
     {
         $bukuTamuDC = BukuTamuDC::find($id);
         $bukuTamuDC->delete();
-        return back()->with('success','Data Berhasil dihapus');
+        return redirect('/DC-Visitor/home')->withErrors(['msg' => 'Data Berhasil dihapus']);
+        //return back()->with('success','Data Berhasil dihapus');
     }
 }

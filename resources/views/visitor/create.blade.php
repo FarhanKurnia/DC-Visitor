@@ -2,13 +2,23 @@
 @section('title', 'create')
 @section('content')
 <div class="container" style="max-width: 600px; margin:auto;">
+    {{-- menampilkan error validasi --}}
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
         <form action="{{ route('store') }}" method="POST">
             @csrf
             <div class="row ">
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
                         <strong>Nama</strong>
-                        <input type="text" name="nama" class="form-control" placeholder="">
+                        <input type="text" name="nama" value="{{ old('nama') }}" class="form-control" placeholder="">
                         @error('nama')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -17,7 +27,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
                         <strong>Nomor KTP</strong>
-                        <input type="text" name="no_ktp" class="form-control" placeholder="">
+                        <input type="text" name="no_ktp" value="{{ old('no_ktp') }}"  class="form-control" placeholder="">
                         @error('no_ktp')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -26,7 +36,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
                         <strong>Instansi</strong>
-                        <input type="text" name="instansi" class="form-control" placeholder="">
+                        <input type="text" name="instansi" value="{{ old('instansi') }}"  class="form-control" placeholder="">
                         @error('instansi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -36,7 +46,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
                         <strong>Nomor Rack</strong>
-                        <input type="text" name="no_rack" class="form-control" placeholder="">
+                        <input type="text" name="no_rack" value="{{ old('no_rack') }}" class="form-control" placeholder="">
                         @error('no_rack')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -46,7 +56,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
                         <strong>Nomor Slot</strong>
-                        <input type="text" name="no_slot" class="form-control" placeholder="">
+                        <input type="text" name="no_slot" value="{{ old('no_slot') }}"  class="form-control" placeholder="">
                         @error('no_slot')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -56,7 +66,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-5">
                     <div class="form-group">
                         <strong>Pekerjaan</strong>
-                        <input type="text" name="pekerjaan" class="form-control" placeholder="">
+                        <input type="text" name="pekerjaan" value="{{ old('pekerjaan') }}"  class="form-control" placeholder="">
                         @error('pekerjaan')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

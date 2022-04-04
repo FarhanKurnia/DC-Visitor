@@ -51,15 +51,23 @@ class BukuTamuDCController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':attribute harus diisi!',
+            'alpha' => ':attribute harus diisikan dengan huruf',
+            'numeric' => ':attribute harus diisikan dengan angka',
+            'min' => ':attribute harus diisi :min karakter!',
+            'max' => ':attribute harus diisi :max karakter!',
+            'alpha_num' => ':attribute hanya dapat diisi dengan angka dan huruf!!!',
+        ];
         $request->validate([
-            'nama' => 'required',
-            'no_ktp'=>'required',
-        	'instansi' => 'required',
-        	'no_rack' => 'required',
-            'no_slot' => 'required',
+            'nama' => 'required|',
+            'no_ktp'=>'required|numeric|min:15|',
+        	'instansi' => 'required|alpha_num',
+        	'no_rack' => 'required|numeric',
+            'no_slot' => 'required|alpha_num',
             'pekerjaan' => 'required',
             'status' => 'required',
-            ]);
+            ],$messages);
 
         /*$BukuTamuDC        = new BukuTamuDC;
         $BukuTamuDC->nama = $request->nama;
@@ -72,13 +80,13 @@ class BukuTamuDCController extends Controller
         //$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->paginate(5);
 
         //gagal bikin supaya if ktp_masukan == ktp_database && status == checkin
-        //$ktp=BukuTamuDC::select('no_ktp')->where('no_ktp', $request->no_ktp)->first(); //this also can
-        $bukuTamuDC=BukuTamuDC::where('no_ktp', $request->no_ktp)->first(); //this also can
-        //$status=BukuTamuDC::select('status')->where('status', 'checkin')->first(); //this also can
+        $ktp=BukuTamuDC::select('no_ktp')->where('no_ktp', $request->no_ktp)->count(); //this also can
+        //$bukuTamuDC=BukuTamuDC::where('no_ktp', $request->no_ktp)->get(); //this also can
+        $status=BukuTamuDC::select('status')->where('status', $request->status)->count(); //this also can
         //$status=BukuTamuDC::where('status', 'checkin')->first(); //this also can
-        if($request->no_ktp == $bukuTamuDC->no_ktp && $request->status == $bukuTamuDC->status){
-        //if (BukuTamuDC::where('no_ktp', $request->no_ktp )->exists() && $status == $request->status) {
-            // your code...
+        //if($request->no_ktp == $bukuTamuDC&& $request->status == $bukuTamuDC->status){
+        if($ktp > 0 && $status > 0){
+            //if (BukuTamuDC::where('no_ktp', $request->no_ktp )->exists() && $status == $request->status) { 
             return back()->with('Failed','Gagal Check In!');
         }else{
             BukuTamuDC::create($request->all());
@@ -132,7 +140,7 @@ class BukuTamuDCController extends Controller
             'no_slot' => 'required',
             'pekerjaan' => 'required',
             'status' => 'required',
-        ]);
+        ],$messages);
         $bukuTamuDC = BukuTamuDC::findOrFail($id);
 
         $bukuTamuDC->update([

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Session;
+use Redirect;
 use App\Models\BukuTamuDC;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -87,7 +88,10 @@ class BukuTamuDCController extends Controller
         //if($request->no_ktp == $bukuTamuDC&& $request->status == $bukuTamuDC->status){
         if($ktp > 0 && $status > 0){
             //if (BukuTamuDC::where('no_ktp', $request->no_ktp )->exists() && $status == $request->status) { 
-            return back()->with('Failed','Gagal Check In!');
+            //return redirect()->back()->with('duplicate', 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu');   
+            //Session::flash('message', "Status saat ini masih Check-In, Harap Check-out terlebih dahulu");
+            //return Redirect::back();
+            return Redirect::back()->withErrors(['msg' => 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu']);
         }else{
             BukuTamuDC::create($request->all());
             return redirect('/DC-Visitor/home')->with('success','Berhasil Check In!');
@@ -140,7 +144,7 @@ class BukuTamuDCController extends Controller
             'no_slot' => 'required',
             'pekerjaan' => 'required',
             'status' => 'required',
-        ],$messages);
+        ]);
         $bukuTamuDC = BukuTamuDC::findOrFail($id);
 
         $bukuTamuDC->update([

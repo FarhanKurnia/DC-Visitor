@@ -18,7 +18,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                 <div class="form-group">
                     <strong>Nama</strong>
-                    <input type="text" name="nama" value="{{ old('nama') }}" class="form-control" placeholder="">
+                    <input type="text" name="nama" value="{{ old('nama') }}" class="form-control" placeholder="" required>
                     @error('nama')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -27,7 +27,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                 <div class="form-group">
                     <strong>Nomor KTP</strong>
-                    <input type="text" name="no_ktp" value="{{ old('no_ktp') }}"  class="form-control" placeholder="">
+                    <input type="text" name="no_ktp" value="{{ old('no_ktp') }}"  class="form-control" placeholder="" required>
                     @error('no_ktp')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -36,7 +36,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                 <div class="form-group">
                     <strong>Instansi</strong>
-                    <input type="text" name="instansi" value="{{ old('instansi') }}"  class="form-control" placeholder="">
+                    <input type="text" name="instansi" value="{{ old('instansi') }}"  class="form-control" placeholder="" required>
                     @error('instansi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -45,7 +45,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                 <div class="form-group">
                     <strong>Nomor Rack</strong>
-                    <input type="text" name="no_rack" value="{{ old('no_rack') }}" class="form-control" placeholder="">
+                    <input type="text" name="no_rack" value="{{ old('no_rack') }}" class="form-control" placeholder="" required>
                     @error('no_rack')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

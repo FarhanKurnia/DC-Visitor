@@ -20,20 +20,20 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>KTP</th>
-                            <th>Instansi</th>
-                            <th>Status</th>
-                            <th>Waktu</th>
-                            <th colspan="2">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $no = '1';
-                        @endphp
-                        @foreach($bukuTamuDC as $visitor)
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>KTP</th>
+                        <th>Instansi</th>
+                        <th>Status</th>
+                        <th>Waktu</th>
+                        <th colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $no = '1';
+                    @endphp
+                    @foreach($bukuTamuDC as $visitor)
                         <tr>
                             <td>{{ $no++}}</td>
                             <td>{{ $visitor->nama }}</td>

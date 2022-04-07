@@ -29,7 +29,7 @@ class BukuTamuDCSeeder extends Seeder
         ],
         [
             'nama' => 'Ragil',
-            'no_ktp'=>'195411052',
+            'no_ktp'=>'1234567890123456',
         	'instansi' => 'BIZNET',
         	'no_rack' => '1',
             'no_slot' => '5',

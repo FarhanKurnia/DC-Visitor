@@ -19,14 +19,39 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('DC-Visitor/dashboard') }}">
+                <a class="navbar-brand" href="{{ url('dashboard') }}">
                     <img src="/assets/citranet.png" alt="" width="100" height="30">
                 </a>
+                @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Welcome back, {{auth()->user()->name}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-right"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else  
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <a href="/login" class="nav-link"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                        </li>
+                    </ul>
+                @endauth
             </div>
         </nav>
         <main class="py-4">

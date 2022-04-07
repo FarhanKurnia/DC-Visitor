@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @section('content')
 <div class="container" style="max-width: 600px; margin:auto;">
-    <form action="{{ url('DC-Visitor/'.$bukuTamuDC->id.'/update-checkout') }}" method="POST">
+    <form action="{{ url('/'.$bukuTamuDC->id.'/update-checkout') }}" method="POST">
         @csrf
         @method('PUT')
         <div class="row ">
@@ -89,3 +89,4 @@
 <!-- include summernote js -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 @endsection
+@extends('layouts.footer')

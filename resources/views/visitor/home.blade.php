@@ -26,7 +26,11 @@
         <div class="col text-center">
             <a href="check-in" class="btn btn-danger btn-lg btn-block">Check In</a>
             <a href="search" class="btn btn-danger btn-lg btn-block">Check Out</a>
+            <br>
+            <br>
+            <small><a href="/login">Login </a> to Dashboard</small>
         </div>
     </div>
 </div>
 @endsection
+@extends('layouts.footer')

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,23 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Home
 Route::get('/', function () {
-    return view('welcome');
+    return view('visitor.home');
 });
 
-/*Auth::routes();*/
+//Admin
+Route::get('/dashboard', [App\Http\Controllers\BukuTamuDCController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::get('/{id}/edit', [App\Http\Controllers\BukuTamuDCController::class, 'edit'])->middleware('auth');
+Route::get('/{id}/show', [App\Http\Controllers\BukuTamuDCController::class, 'show'])->middleware('auth')->name('show');
+Route::put('/{id}/update', [App\Http\Controllers\BukuTamuDCController::class, 'update'])->middleware('auth')->name('update');
+Route::delete('/{id}/delete', [App\Http\Controllers\BukuTamuDCController::class, 'destroy'])->middleware('auth');
 
-Route::get('DC-Visitor/dashboard', [App\Http\Controllers\BukuTamuDCController::class, 'index'])->name('dashboard');
-Route::get('DC-Visitor/check-in', [App\Http\Controllers\BukuTamuDCController::class, 'create'])->name('create');
-Route::get('DC-Visitor/home', [App\Http\Controllers\BukuTamuDCController::class, 'home'])->name('home');
-Route::post('DC-Visitor/store', [App\Http\Controllers\BukuTamuDCController::class, 'store'])->name('store');
-Route::get('DC-Visitor/{id}/edit', [App\Http\Controllers\BukuTamuDCController::class, 'edit']);
-Route::get('DC-Visitor/{id}/checkout', [App\Http\Controllers\BukuTamuDCController::class, 'editlogout']);
-Route::get('DC-Visitor/{id}/show', [App\Http\Controllers\BukuTamuDCController::class, 'show'])->name('show');
-Route::put('DC-Visitor/{id}/update', [App\Http\Controllers\BukuTamuDCController::class, 'update'])->name('update');
-Route::put('DC-Visitor/{id}/update-checkout', [App\Http\Controllers\BukuTamuDCController::class, 'updatelogout']);
-Route::delete('DC-Visitor/{id}/delete', [App\Http\Controllers\BukuTamuDCController::class, 'destroy']);
-Route::get('DC-Visitor/search', [App\Http\Controllers\BukuTamuDCController::class, 'search'])->name('search');
+//Client
+Route::get('/home', [App\Http\Controllers\BukuTamuDCController::class, 'home'])->name('home');
+Route::post('/store', [App\Http\Controllers\BukuTamuDCController::class, 'store'])->name('store');
+Route::get('/check-in', [App\Http\Controllers\BukuTamuDCController::class, 'create'])->name('create');
+Route::get('/{id}/checkout', [App\Http\Controllers\BukuTamuDCController::class, 'editlogout']);
+Route::put('/{id}/update-checkout', [App\Http\Controllers\BukuTamuDCController::class, 'updatelogout']);
+Route::get('/search', [App\Http\Controllers\BukuTamuDCController::class, 'search'])->name('search');
 
-//Auth::routes();
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Login
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);

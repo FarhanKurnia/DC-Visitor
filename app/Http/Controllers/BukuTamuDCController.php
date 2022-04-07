@@ -17,21 +17,13 @@ class BukuTamuDCController extends Controller
      */
     public function index()
     {
-        // mengambil data dari table tamu
     	$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->paginate(5);
-
-    	// mengirim data tamu ke view index
         return view('admin.index', compact('bukuTamuDC'));
-        //return view('admin.index',['bukuTamuDC' => $bukuTamuDC]);
     }
 
     public function home()
     {
-        // mengambil data dari table tamu
-    	//$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->get();
         return view('visitor.home');
-    	// mengirim data tamu ke view index
-        //return view('admin.index', compact('bukuTamuDC'));
     }
 
     /**
@@ -62,42 +54,21 @@ class BukuTamuDCController extends Controller
         ];
         $request->validate([
             'nama' => 'required|',
-            'no_ktp'=>'required|numeric|min:15|',
+            'no_ktp'=>'required|numeric|min:16',
         	'instansi' => 'required|alpha_num',
         	'no_rack' => 'required|numeric',
             'no_slot' => 'required|alpha_num',
             'pekerjaan' => 'required',
             'status' => 'required',
             ],$messages);
-
-        /*$BukuTamuDC        = new BukuTamuDC;
-        $BukuTamuDC->nama = $request->nama;
-        $BukuTamuDC->no_ktp  = $request->no_ktp;
-        $BukuTamuDC->instansi  = $request->instansi;
-        $BukuTamuDC->no_rack  = $request->no_rack;
-        $BukuTamuDC->no_slot  = $request->no_slot;
-        $BukuTamuDC->pekerjaan  = $request->pekerjaan;
-        $BukuTamuDC->status  = $request->status;*/
-        //$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->paginate(5);
-
-        //gagal bikin supaya if ktp_masukan == ktp_database && status == checkin
-        $ktp=BukuTamuDC::select('no_ktp')->where('no_ktp', $request->no_ktp)->count(); //this also can
-        //$bukuTamuDC=BukuTamuDC::where('no_ktp', $request->no_ktp)->get(); //this also can
-        $status=BukuTamuDC::select('status')->where('status', $request->status)->count(); //this also can
-        //$status=BukuTamuDC::where('status', 'checkin')->first(); //this also can
-        //if($request->no_ktp == $bukuTamuDC&& $request->status == $bukuTamuDC->status){
+        $ktp=BukuTamuDC::select('no_ktp')->where('no_ktp', $request->no_ktp)->count(); 
+        $status=BukuTamuDC::select('status')->where('status', $request->status)->count();
         if($ktp > 0 && $status > 0){
-            //if (BukuTamuDC::where('no_ktp', $request->no_ktp )->exists() && $status == $request->status) { 
-            //return redirect()->back()->with('duplicate', 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu');   
-            //Session::flash('message', "Status saat ini masih Check-In, Harap Check-out terlebih dahulu");
-            //return Redirect::back();
             return Redirect::back()->withErrors(['msg' => 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu']);
         }else{
             BukuTamuDC::create($request->all());
-            return redirect('/DC-Visitor/home')->withErrors(['msg' => 'Berhasil Check In!']);
+            return redirect('/home')->withErrors(['msg' => 'Berhasil Check In!']);
         }
-        //$BukuTamuDC->save();
-
     }
 
     /**
@@ -120,17 +91,13 @@ class BukuTamuDCController extends Controller
      */
     public function edit($id)
     {
-        // mengambil data pegawai berdasarkan id yang dipilih
 	    $bukuTamuDC = BukuTamuDC::findOrFail($id);
-	    // passing data pegawai yang didapat ke view edit.blade.php
 	    return view('admin.edit', compact('bukuTamuDC'));
     }
 
     public function editlogout($id)
     {
-        // mengambil data pegawai berdasarkan id yang dipilih
 	    $bukuTamuDC = BukuTamuDC::findOrFail($id);
-	    // passing data pegawai yang didapat ke view edit.blade.php
 	    return view('visitor.edit', compact('bukuTamuDC'));
     }
 
@@ -153,7 +120,7 @@ class BukuTamuDCController extends Controller
         ]);
 
         if ($bukuTamuDC) {
-            return redirect('/DC-Visitor/home')->withErrors(['msg' => 'Berhasil Check-Out!']);
+            return redirect('/home')->withErrors(['msg' => 'Berhasil Check-Out!']);
         } else {
             return redirect()
                 ->back()
@@ -222,8 +189,8 @@ class BukuTamuDCController extends Controller
                     ->Where('status','checkin')
                     ->orWhere('no_ktp', 'LIKE', "%{$search}%")
                     ->get();
-
-        return view('visitor.search', compact('bukuTamuDC'));
+                    
+        return view('visitor.search', compact('bukuTamuDC'))->withErrors(['msg' => 'Data Berhasil dihapus']);
     }
 
     /**

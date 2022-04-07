@@ -19,16 +19,17 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand mx-auto" href="{{ url('DC-Visitor/home') }}">
+                <a class="navbar-brand mx-auto" href="{{ url('/home') }}">
                     <img src="/assets/citranet.png" alt="" width="100" height="30" >
                 </a>
-            </div>
+            </div>         
         </nav>
         <main class="py-4">
             @yield('content')

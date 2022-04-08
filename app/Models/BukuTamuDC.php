@@ -11,7 +11,7 @@ class BukuTamuDC extends Model
     protected $table = 'buku_tamu_d_c_s';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama','no_ktp','instansi','no_rack','no_slot','pekerjaan','status','updated_at','created_at',
+        'nama','no_ktp','instansi','no_rack','no_slot','pekerjaan','status','updated_at','created_at','updated',
     ];
     //protected $guarded = [];
 }

@@ -118,6 +118,7 @@ class BukuTamuDCController extends Controller
 
         $bukuTamuDC->update([
             'status' => $request->status='checkout',
+            'updated' => Carbon::now(),
 
         ]);
 

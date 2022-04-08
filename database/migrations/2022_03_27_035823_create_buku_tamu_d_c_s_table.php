@@ -27,8 +27,9 @@ class CreateBukuTamuDCSTable extends Migration
             $table->string('foto')->nullable();
             $table->enum('status',['checkin','checkout']);
             //$table->timestamps();
-            $table->dateTime('created_at')->nullable();
-            $table->dateTime('updated_at')->nullable();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('updated')->nullable();
         });
     }
     /**

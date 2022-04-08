@@ -195,11 +195,11 @@ class BukuTamuDCController extends Controller
         }else{
             $show = true ;
             $bukuTamuDC = BukuTamuDC::query()
-                    ->where('nama', 'LIKE', "%{$search}%")
+                    ->where('nama', '=', $search)
                     ->Where('status','checkin')
-                    ->orWhere('no_ktp', 'LIKE', "%{$search}%")
+                    ->orWhere('no_ktp', '=', $search)
                     ->get();
-            return view('visitor.search',['show' => $show], compact('bukuTamuDC'))->withErrors(['msg' => 'Data tidak ditemukan']);
+            return view('visitor.search',['show' => $show], compact('bukuTamuDC'))->withErrors(['msg' => 'Data ditemukan']);
         }          
     }
 

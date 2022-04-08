@@ -24,9 +24,8 @@
                             <th colspan="2">Action</th>
                         </tr>
                     </thead>
-                    <tbody>    
-                    @if (count($errors) > 0)
-                        @if($bukuTamuDC->isNotEmpty())
+                    <tbody> 
+                        @if($bukuTamuDC->isNotEmpty() && $show == true)
                             @foreach($bukuTamuDC as $bukuTamuDC)
                                 @if($bukuTamuDC->status=='checkin')
                                     <tr>
@@ -49,7 +48,6 @@
                                 <td colspan="5" style="text-align:center;">Data tidak ditemukan</th>
                             </tr>
                         </tr>
-                        @endif
                     @endif
                     </tbody>
                 </table>

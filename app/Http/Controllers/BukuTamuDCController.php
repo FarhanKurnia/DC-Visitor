@@ -7,6 +7,7 @@ use App\Models\BukuTamuDC;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
 
 class BukuTamuDCController extends Controller
 {
@@ -183,14 +184,23 @@ class BukuTamuDCController extends Controller
     public function search(Request $request)
 	{
 		$search = $request->input('search');
-
-        $bukuTamuDC = BukuTamuDC::query()
+        if(empty($search)){
+            $show = false ;
+            $bukuTamuDC = BukuTamuDC::query()
                     ->where('nama', 'LIKE', "%{$search}%")
                     ->Where('status','checkin')
                     ->orWhere('no_ktp', 'LIKE', "%{$search}%")
                     ->get();
-                    
-        return view('visitor.search', compact('bukuTamuDC'))->withErrors(['msg' => 'Data Berhasil dihapus']);
+            return view('visitor.search',['show' => $show], compact('bukuTamuDC'))->withErrors(['msg' => 'Data tidak ditemukan']);
+        }else{
+            $show = true ;
+            $bukuTamuDC = BukuTamuDC::query()
+                    ->where('nama', 'LIKE', "%{$search}%")
+                    ->Where('status','checkin')
+                    ->orWhere('no_ktp', 'LIKE', "%{$search}%")
+                    ->get();
+            return view('visitor.search',['show' => $show], compact('bukuTamuDC'))->withErrors(['msg' => 'Data tidak ditemukan']);
+        }          
     }
 
     /**

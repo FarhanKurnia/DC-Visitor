@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
 
+
 class CreateBukuTamuDCSTable extends Migration
 {
     /**
@@ -25,7 +26,9 @@ class CreateBukuTamuDCSTable extends Migration
             $table->string('pekerjaan');
             $table->string('foto')->nullable();
             $table->enum('status',['checkin','checkout']);
-            $table->timestamps();
+            //$table->timestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
         });
     }
     /**

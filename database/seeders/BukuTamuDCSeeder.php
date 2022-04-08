@@ -25,7 +25,6 @@ class BukuTamuDCSeeder extends Seeder
             'pekerjaan' => 'Ganti kabel',
             'status' => 'checkin',
             'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
         ],
         [
             'nama' => 'Ragil',
@@ -36,7 +35,6 @@ class BukuTamuDCSeeder extends Seeder
             'pekerjaan' => 'Ganti server',
             'status' => 'checkin',
             'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
         ]]);
 
     }

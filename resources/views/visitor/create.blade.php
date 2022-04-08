@@ -58,8 +58,8 @@
                     @error('no_slot')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    </div>
                 </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12 mb-5">
                 <div class="form-group">
                     <strong>Pekerjaan</strong>
@@ -67,9 +67,11 @@
                     @error('pekerjaan')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    </div>
                 </div>
+            </div>
             <input type="hidden" name="status" value="checkin">
+            <input type="hidden" name="created_at" value="{{date('Ym-d')}}">
+            <input type="hidden" name="updated_at" value="">
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-danger">Check In</button>
                 </div>

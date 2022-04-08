@@ -65,8 +65,14 @@
                 <strong>Check Out</strong>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                {{ $bukuTamuDC->updated_at->isoFormat('dddd, D MMMM Y')}}
-                {{ date_format($bukuTamuDC->updated_at,'h:i:s A')}}
+                @if($bukuTamuDC->updated_at==null)
+                    @php
+                        echo "-";
+                    @endphp
+                @else
+                    {{$bukuTamuDC->created_at->isoFormat('dddd, D MMMM Y')}}
+                    {{date_format($bukuTamuDC->created_at,'h:i:s A')}}
+                @endif
             </div>
 
             <div class="col-6 col-sm-6 col-md-6 col-lg-6">
@@ -74,10 +80,14 @@
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 @php
+                if($bukuTamuDC->updated_at==null){
+                    echo "-";
+                }else{
                     $create = $bukuTamuDC->created_at;
                     $update = $bukuTamuDC->updated_at;
                     $durasi = $create->diff($update);
                     echo $durasi->format('%i Menit');
+                }
                 @endphp
             </div>
         </div>

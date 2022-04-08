@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Session;
+use Carbon\Carbon;
 use Redirect;
 use App\Models\BukuTamuDC;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class BukuTamuDCController extends Controller
      */
     public function index()
     {
-    	$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->paginate(5);
+    	$bukuTamuDC = BukuTamuDC::orderBy('id', 'DESC')->paginate(10);
         return view('admin.index', compact('bukuTamuDC'));
     }
 
@@ -64,7 +65,7 @@ class BukuTamuDCController extends Controller
             ],$messages);
         $ktp=BukuTamuDC::select('no_ktp')->where('no_ktp', $request->no_ktp)->count(); 
         $status=BukuTamuDC::select('status')->where('status', $request->status)->count();
-        if($ktp > 0 && $status > 0){
+        if($ktp > 0 && $status == 'checkin'){
             return Redirect::back()->withErrors(['msg' => 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu']);
         }else{
             BukuTamuDC::create($request->all());
@@ -161,7 +162,6 @@ class BukuTamuDCController extends Controller
             'no_slot' => $request->no_slot,
             'pekerjaan' => $request->pekerjaan,
             'status' => $request->status,
-
         ]);
 
         if ($bukuTamuDC) {

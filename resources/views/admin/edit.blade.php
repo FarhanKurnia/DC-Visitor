@@ -69,7 +69,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                 <div class="form-group">
                     <strong>Status</strong>
-                    <select name="status" class="form-control" required>
+                    <select name="status" class="form-control" disabled>
                         <option value="checkin" {{ $bukuTamuDC->status == 'checkin' ? 'selected':'' }}>Check In</option>
                         <option value="checkout" {{ $bukuTamuDC->status == 'checkout' ? 'selected':'' }}>Check Out</option>
                     </select>

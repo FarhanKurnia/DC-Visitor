@@ -12,7 +12,7 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('store') }}" method="POST">
+    <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row ">
             <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
@@ -60,13 +60,19 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 mb-5">
+            <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                 <div class="form-group">
                     <strong>Pekerjaan</strong>
                     <input type="text" name="pekerjaan" value="{{ old('pekerjaan') }}"  class="form-control" placeholder="Masukan detail pengerjaan yang akan dilakukan">
                     @error('pekerjaan')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 mb-5">
+                <div class="form-group">
+                    <strong>Upload Foto</strong>
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" name="foto">
                 </div>
             </div>
             <input type="hidden" name="status" value="checkin">

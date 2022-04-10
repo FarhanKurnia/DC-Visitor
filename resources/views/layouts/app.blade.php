@@ -38,6 +38,14 @@
                             <li>
                                 <form action="/logout" method="POST">
                                     @csrf
+                                    <a href={{route('home')}} class="dropdown-item">
+                                        <i class="bi bi-house-door-fill"></i> Home
+                                    </a>
+                                </form>
+                            </li>
+                            <li>
+                                <form action="/logout" method="POST">
+                                    @csrf
                                     <button type="submit" class="dropdown-item">
                                         <i class="bi bi-box-arrow-right"></i> Logout
                                     </button>
@@ -45,7 +53,7 @@
                             </li>
                         </ul>
                     </li>
-                @else  
+                @else
                     <ul class="navbar-nav">
                         <li class="nav-item">
                         <a href="/login" class="nav-link"><i class="bi bi-box-arrow-in-right"></i> Login</a>

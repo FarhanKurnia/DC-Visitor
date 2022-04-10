@@ -7,6 +7,8 @@ use Redirect;
 use App\Models\BukuTamuDC;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -55,6 +57,7 @@ class BukuTamuDCController extends Controller
             'alpha_num' => ':attribute hanya dapat diisi dengan angka dan huruf!!!',
         ];
         $request->validate([
+            'foto'     => 'required|image|mimes:png,jpg,jpeg',
             'nama' => 'required|',
             'no_ktp'=>'required|numeric|min:16',
         	'instansi' => 'required|alpha_num',
@@ -63,12 +66,24 @@ class BukuTamuDCController extends Controller
             'pekerjaan' => 'required',
             'status' => 'required',
             ],$messages);
-        $ktp=BukuTamuDC::select('no_ktp')->where('no_ktp', $request->no_ktp)->count(); 
+        $ktp=BukuTamuDC::select('no_ktp')->where('no_ktp', $request->no_ktp)->count();
         $status=BukuTamuDC::select('status')->where('status', $request->status)->count();
         if($ktp > 0 && $status == 'checkin'){
             return Redirect::back()->withErrors(['msg' => 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu']);
         }else{
-            BukuTamuDC::create($request->all());
+            $foto = $request->file('foto');
+            $foto->storeAs('public/uploads', $foto->hashName());
+            //BukuTamuDC::create($request->all());
+            BukuTamuDC::create([
+                'foto'     => $foto->hashName(),
+                'nama' => $request->nama,
+                'no_ktp'=>$request->no_ktp,
+                'instansi' => $request->instansi,
+                'no_rack' => $request->no_rack,
+                'no_slot' => $request->no_slot,
+                'pekerjaan' => $request->pekerjaan,
+                'status' => $request->status,
+            ]);
             return redirect('/home')->withErrors(['msg' => 'Berhasil Check In!']);
         }
     }
@@ -201,7 +216,7 @@ class BukuTamuDCController extends Controller
                     ->orWhere('no_ktp', '=', $search)
                     ->get();
             return view('visitor.search',['show' => $show], compact('bukuTamuDC'))->withErrors(['msg' => 'Data ditemukan']);
-        }          
+        }
     }
 
     /**

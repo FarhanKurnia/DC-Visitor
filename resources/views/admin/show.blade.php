@@ -62,6 +62,13 @@
             </div>
 
             <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <strong>Foto</strong>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <img src="{{ Storage::url('public/updates/').$bukuTamuDC->foto }}" class="rounded" style="width: 150px">
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <strong>Check Out</strong>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6">

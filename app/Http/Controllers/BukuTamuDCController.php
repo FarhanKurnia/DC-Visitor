@@ -57,7 +57,7 @@ class BukuTamuDCController extends Controller
             'alpha_num' => ':attribute hanya dapat diisi dengan angka dan huruf!!!',
         ];
         $request->validate([
-            'foto'     => 'required|image|mimes:png,jpg,jpeg',
+            // 'foto'     => 'required|image|mimes:png,jpg,jpeg',
             'nama' => 'required|',
             'no_ktp'=>'required|numeric|min:16',
         	'instansi' => 'required|alpha_num',
@@ -71,16 +71,20 @@ class BukuTamuDCController extends Controller
         if($ktp > 0 && $status == 'checkin'){
             return Redirect::back()->withErrors(['msg' => 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu']);
         }else{
-            $img =  $request->get('kamera');
+            $img =  base64_encode($request->get('kamera'));
             $folderPath = "uploads/";
-            $image_parts = explode(";base64,", $img);
+            // $image_parts = explode(";base64,", $img);
 
-            foreach ($image_parts as $key => $image){
-                $image_base64 = base64_decode($image);
-            }
+            // foreach ($image_parts as $key => $image){
+            //     $image_base64 = base64_decode($image);
+            // }
+            $img = str_replace('data:image/png;base64,', '', $img);
+            $img = str_replace(' ', '+', $img);
+            $data = base64_decode($img);
+            
             $fileName = uniqid() . '.png';
             $file = $folderPath . $fileName;
-            file_put_contents($file, $image_base64);
+            file_put_contents($file, $data);
 
             $foto = $request->file('foto');
             $foto->storeAs('public/uploads', $foto->hashName());
@@ -92,7 +96,7 @@ class BukuTamuDCController extends Controller
             //BukuTamuDC::create($request->all());
             BukuTamuDC::create([
                 'kamera' => $fileName,
-                'foto'     => $foto->hashName(),
+                'foto' => $foto->hashName(),
                 'nama' => $request->nama,
                 'no_ktp'=>$request->no_ktp,
                 'instansi' => $request->instansi,

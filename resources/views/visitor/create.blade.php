@@ -91,8 +91,8 @@
             <input type="hidden" name="updated_at" id="updated_at" value="">
             <input type="hidden" name="updated" id="updated" value="">
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    {{-- <button type="submit" class="btn btn-danger">Check In</button> --}}
-                    <button type="submit" class="tombol-simpan btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-danger">Check In</button>
+                    {{-- <button type="submit" class="tombol-simpan btn btn-primary">Register</button> --}}
                 </div>
             </div>
         </form>

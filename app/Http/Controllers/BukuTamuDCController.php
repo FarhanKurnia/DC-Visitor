@@ -71,10 +71,27 @@ class BukuTamuDCController extends Controller
         if($ktp > 0 && $status == 'checkin'){
             return Redirect::back()->withErrors(['msg' => 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu']);
         }else{
+            $img =  $request->get('kamera');
+            $folderPath = "uploads/";
+            $image_parts = explode(";base64,", $img);
+
+            foreach ($image_parts as $key => $image){
+                $image_base64 = base64_decode($image);
+            }
+            $fileName = uniqid() . '.png';
+            $file = $folderPath . $fileName;
+            file_put_contents($file, $image_base64);
+
             $foto = $request->file('foto');
             $foto->storeAs('public/uploads', $foto->hashName());
+            // $kamera = $request->file('kamera');
+            // $kamera = str_replace('data:image/jpeg;base64,', '', $kamera);
+            // $kamera = str_replace(' ', '+', $kamera);
+		    // $kamera = base64_decode($kamera);
+            // $kamera->storeAs('public/uploads', $kamera->hashName());
             //BukuTamuDC::create($request->all());
             BukuTamuDC::create([
+                'kamera' => $fileName,
                 'foto'     => $foto->hashName(),
                 'nama' => $request->nama,
                 'no_ktp'=>$request->no_ktp,

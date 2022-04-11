@@ -25,6 +25,7 @@ class CreateBukuTamuDCSTable extends Migration
             $table->string('no_slot');
             $table->string('pekerjaan');
             $table->string('foto')->nullable();
+            $table->string('kamera')->nullable();
             $table->enum('status',['checkin','checkout']);
             //$table->timestamps();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

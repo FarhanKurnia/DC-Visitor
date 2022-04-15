@@ -71,20 +71,32 @@ class BukuTamuDCController extends Controller
         if($ktp > 0 && $status == 'checkin'){
             return Redirect::back()->withErrors(['msg' => 'Status saat ini masih Check-In, Harap Check-out terlebih dahulu']);
         }else{
-            $img =  base64_encode($request->get('kamera'));
-            $folderPath = "uploads/";
+            define('UPLOAD_DIR', 'uploads/');
+            $img =  $request->get('image');
+            //$folderPath = "uploads/";
             // $image_parts = explode(";base64,", $img);
 
             // foreach ($image_parts as $key => $image){
             //     $image_base64 = base64_decode($image);
             // }
-            $img = str_replace('data:image/png;base64,', '', $img);
-            $img = str_replace(' ', '+', $img);
-            $data = base64_decode($img);
+            $img        = str_replace('data:image/jpeg;base64,', '', $img);
+            $img        = str_replace(' ', '+', $img);
+    
+            //resource gambar diubah dari encode
+            $data       = base64_decode($img);
+            //dd($data);
+            //menamai file, file dinamai secara random dengan unik
+            $file       = uniqid() . '.png';
+            // $img = str_replace('data:image/png;base64,', '', $img);
+            // $img = str_replace(' ', '+', $img);
+            // $data = base64_decode($img);
             
-            $fileName = uniqid() . '.png';
-            $file = $folderPath . $fileName;
-            file_put_contents($file, $data);
+            // $fileName = uniqid() . '.png';
+            // $file = $folderPath . $data;
+            //file_put_contents($file, $data);
+            
+            // memindahkan file ke folder upload
+            file_put_contents(UPLOAD_DIR.$file, $data);
 
             $foto = $request->file('foto');
             $foto->storeAs('public/uploads', $foto->hashName());
@@ -95,7 +107,7 @@ class BukuTamuDCController extends Controller
             // $kamera->storeAs('public/uploads', $kamera->hashName());
             //BukuTamuDC::create($request->all());
             BukuTamuDC::create([
-                'kamera' => $fileName,
+                'kamera' => $file,
                 'foto' => $foto->hashName(),
                 'nama' => $request->nama,
                 'no_ktp'=>$request->no_ktp,

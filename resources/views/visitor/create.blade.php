@@ -71,28 +71,31 @@
                     @enderror
                 </div>
             </div>
+            
+            {{-- Upload Field
             <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                 <div class="form-group">
                     <strong>Upload Foto</strong>
                     <input type="file" class="form-control @error('image') is-invalid @enderror" name="foto" id="foto">
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                <div id="my_camera"></div>
+            </div> --}}
+
+            <div class="col-xs-12 col-sm-12 col-md-12 mb-3 text-center">
+                <div id="my_camera" style="margin:auto"></div>
                 <br/>
                 <input type=button class="btn btn-sm btn-primary" value="Take Snapshot" onClick="take_snapshot()">
                 <input type="hidden"  name="image" class="image-tag">
             </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 mb-5 text-center">
+                <div id="results">Hasil foto yang ditangkap akan muncul disini...</div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 mb-5">
-                <div id="results">Your captured image will appear here...</div>
-            </div>
+
             <input type="hidden" name="status" id="status" value="checkin">
             <input type="hidden" name="updated_at" id="updated_at" value="">
             <input type="hidden" name="updated" id="updated" value="">
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-danger">Check In</button>
-                    {{-- <button type="submit" class="tombol-simpan btn btn-primary">Register</button> --}}
                 </div>
             </div>
         </form>
@@ -121,7 +124,6 @@ Webcam.set({
 });
 
 //menampilkan webcam di dalam file html dengan id my_camera
-//Webcam.attach('#my_camera');
     Webcam.attach( '#my_camera' );
     function take_snapshot() {
         Webcam.snap( function(data_uri) {
@@ -130,54 +132,4 @@ Webcam.set({
         } );
     }
 </script>
-{{--
-<script type="text/javascript">
-    // jalankan aksi saat tombol register disubmit
-    $(".tombol-simpan").click(function () {
-        event.preventDefault();
-
-        // membuat variabel image
-        var kamera = '';
-
-        //mengambil data username dari form di atas dengan id name
-        var nama = $('#nama').val();
-        var no_ktp = $('#no_ktp').val();
-        var instansi = $('#instansi').val();
-        var no_rack = $('#no_rack').val();
-        var no_slot = $('#no_slot').val();
-        var pekerjaan = $('#pekerjaan').val();
-        var foto = $('#foto').val();
-        var status = $('#status').val();
-        var updated_at = $('#status').val();
-        var updated = $('#updated').val();
-
-        //memasukkan data gambar ke dalam variabel image
-        Webcam.snap(function (data_uri) {
-            kamera = data_uri;
-        });
-
-        //mengirimkan data ke file action.php dengan teknik ajax
-        $.ajax({
-            url: '{{route('store')}}',
-            type: 'POST',
-            data: {
-                nama: nama,
-                no_ktp: no_ktp,
-                instansi: instansi,
-                no_rack: no_rack,
-                no_slot: no_slot,
-                pekerjaan: pekerjaan,
-                foto: foto,
-                status: status,
-                updated_at: updated_at,
-                updated: updated,
-            },
-            success: function () {
-                alert('input data berhasil');
-                // menjalankan fungsi update setelah kirim data selesai dilakukan
-            }
-        })
-    });
-</script> --}}
 @endsection
-@extends('layouts.footer')

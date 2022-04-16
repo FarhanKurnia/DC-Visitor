@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'Edit')
 @section('content')
 <div class="container" style="max-width: 600px; margin:auto;">
     <form action="{{ url('/'.$bukuTamuDC->id.'/update') }}" method="POST">

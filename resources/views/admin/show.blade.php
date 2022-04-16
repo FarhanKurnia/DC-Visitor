@@ -1,6 +1,8 @@
-@extends('layouts.app-client')
+@extends('layouts.app')
+@section('title', 'Show')
 @section('content')
 <div class="container" style="max-width: 600px; margin:auto;">
+    <h2 class="text-center">Data Visitor</h2>
     <div class="card">
     <div class="card-body bg-light">
         <div class="row">
@@ -85,8 +87,9 @@
                 }else{
                     $create = $bukuTamuDC->created_at;
                     $update = $bukuTamuDC->updated;
-                    $durasi = $create->diff($update);
-                    echo $durasi->format('%i Menit');
+                    // $durasi = $create->diff($update);
+                    $durasi = date_diff($create, $update);
+                    echo $durasi->format("%d Hari - %h Jam - %i Menit");
                 }
                 @endphp
             </div>

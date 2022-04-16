@@ -83,7 +83,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 mb-3 text-center">
                 <div id="my_camera" style="margin:auto"></div>
                 <br/>
-                <input type=button class="btn btn-sm btn-primary" value="Take Snapshot" onClick="take_snapshot()">
+                <input type=button class="btn btn-sm btn-primary" value="Take Photo" onClick="take_snapshot()">
                 <input type="hidden"  name="image" class="image-tag">
             </div>
             

@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-xs-2 col-md-12 col-lg-12">
-            <a href={{route('create')}} class="btn btn-primary btn-sm mb-2">Check In</a>
+            {{-- <a href={{route('create')}} class="btn btn-primary btn-sm mb-2">Check In</a> --}}
+            <h2 class="text-center">Daftar Visitor Data Center</h2>
             <br>
             {{-- menampilkan error validasi --}}
             @if (count($errors) > 0)
